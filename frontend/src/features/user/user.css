@@ -1,0 +1,125 @@
+.userlist-container {
+  margin-left: 270px;
+  padding: 40px 24px;
+  min-height: 100vh;
+  background: linear-gradient(120deg, #e8f5e9 60%, #b2dfdb 100%);
+}
+
+.userlist-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #16896a;
+  margin-bottom: 32px;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 8px rgba(22, 137, 106, 0.08);
+}
+
+/* Table Container */
+.userlist-table-container {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 2px 16px rgba(22, 137, 106, 0.08);
+  padding: 28px 18px;
+  overflow-x: auto;
+}
+
+/* Table */
+.userlist-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1rem;
+  color: #222;
+  background: #fff;
+}
+
+.userlist-table th,
+.userlist-table td {
+  padding: 14px 12px;
+  text-align: left;
+}
+
+.userlist-table th {
+  background: #1abc9c;
+  color: #fff;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.userlist-table tr {
+  border-bottom: 1px solid #e0f2f1;
+  transition: background 0.18s;
+}
+
+.userlist-table tr:hover {
+  background: #e0f7fa;
+}
+
+.userlist-table td {
+  vertical-align: middle;
+}
+
+/* Action Buttons */
+.userlist-action-btn {
+  border: none;
+  outline: none;
+  background: #16a085;
+  color: #fff;
+  padding: 7px 18px;
+  border-radius: 6px;
+  font-size: 0.97rem;
+  margin-right: 8px;
+  cursor: pointer;
+  transition: background 0.18s, filter 0.18s;
+  font-weight: 500;
+  box-shadow: 0 2px 8px rgba(22, 137, 106, 0.08);
+}
+
+.user-create {
+  width: 100%;
+  max-width: 420px;
+  background: #1abc9c;
+  color: #fff;
+  border: none;
+  border-radius: 7px;
+  padding: 12px 0;
+  font-size: 1.08rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 12px;
+  transition: background 0.18s;
+  letter-spacing: 0.5px;
+}
+
+.userlist-action-btn.edit {
+  background: #27ae60;
+}
+
+.userlist-action-btn.delete {
+  background: #e74c3c;
+}
+
+.userlist-action-btn:hover {
+  filter: brightness(1.1);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .userlist-container {
+    margin-left: 0;
+    padding: 18px 4vw;
+  }
+  .userlist-table th,
+  .userlist-table td {
+    padding: 10px 6px;
+    font-size: 0.97rem;
+  }
+  .user-form-container {
+    padding: 18px 6px;
+  }
+  .user-form-fields {
+    flex-direction: column;
+    gap: 8px;
+  }
+}
