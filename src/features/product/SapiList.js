@@ -7,6 +7,21 @@ const SapiList = () => {
   const [sapis, setSapis] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  // Fungsi untuk format harga ke IDR
+  const formatIDR = (amount) => {
+    return new Intl.NumberFormat("id-ID", {
+      style: "currency",
+      currency: "IDR",
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    }).format(amount);
+  };
+
+  // Fungsi format number dengan separator
+  const formatNumber = (number) => {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  };
+
   const fetchSapis = () => {
     setLoading(true);
     fetch(API_URL, {
@@ -60,9 +75,9 @@ const SapiList = () => {
                 <tr key={sapi.id}>
                   <td>{sapi.id}</td>
                   <td>{sapi.umur} Tahun</td>
-                  <td>{sapi.berat} Kg</td>
-                  <td>{sapi.stok} Ekor</td>
-                  <td>Rp. {sapi.harga}</td>
+                  <td>{formatNumber(sapi.berat)} Kg</td>
+                  <td>{formatNumber(sapi.stok)} Ekor</td>
+                  <td className="price-cell">{formatIDR(sapi.harga)}</td>
                 </tr>
               ))}
             </tbody>

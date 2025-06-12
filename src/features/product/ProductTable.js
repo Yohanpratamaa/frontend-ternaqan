@@ -5,6 +5,21 @@ import "./product.css";
 function ProductTable({ products, onDelete }) {
   const navigate = useNavigate();
 
+  // Fungsi untuk format harga ke IDR
+  const formatIDR = (amount) => {
+    return new Intl.NumberFormat("id-ID", {
+      style: "currency",
+      currency: "IDR",
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    }).format(amount);
+  };
+
+  // Alternatif fungsi format manual dengan separator
+  const formatNumber = (number) => {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  };
+
   return (
     <table className="product-table">
       <thead>
@@ -22,9 +37,9 @@ function ProductTable({ products, onDelete }) {
           <tr key={sapi.id}>
             <td>{sapi.id}</td>
             <td>{sapi.umur} Tahun</td>
-            <td>{sapi.berat} Kg</td>
-            <td>{sapi.stok} Ekor</td>
-            <td>Rp. {sapi.harga}</td>
+            <td>{formatNumber(sapi.berat)} Kg</td>
+            <td>{formatNumber(sapi.stok)} Ekor</td>
+            <td className="price-cell">{formatIDR(sapi.harga)}</td>
             <td>
               <button
                 onClick={() => navigate(`/product/edit/${sapi.id}`)}
