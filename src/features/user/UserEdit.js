@@ -3,7 +3,7 @@ import UserForm from "./UserForm";
 import { useParams, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
-const API_URL = "http://localhost:8000/";
+const API_URL = process.env.REACT_APP_ADMIN_API;
 
 function UserEdit() {
   const { id } = useParams();

@@ -20,9 +20,9 @@ ChartJS.register(
   Legend
 );
 
-const ADMIN_API = "http://localhost:8000/";
-const SAPI_API = "http://localhost:8001/";
-const PET_API = "http://localhost:8002/";
+const ADMIN_API = process.env.REACT_APP_ADMIN_API;
+const SAPI_API = process.env.REACT_APP_SAPI_API;
+const PET_API = process.env.REACT_APP_PET_API;
 const TRX_API = "http://localhost:8003/"; // Ganti jika ada service transaksi
 
 const Dashboard = () => {

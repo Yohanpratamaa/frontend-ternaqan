@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import "./user.css";
 
-const API_URL = "http://localhost:8000/";
+const API_URL = process.env.REACT_APP_ADMIN_API;
 
 function UserList({ onEdit }) {
   const [admins, setAdmins] = useState([]);

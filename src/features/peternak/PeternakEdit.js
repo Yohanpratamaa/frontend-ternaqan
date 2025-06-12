@@ -4,7 +4,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import "./peternak.css";
 
-const API_URL = "http://localhost:8002/";
+const API_URL = process.env.REACT_APP_PET_API;
 
 function PeternakEdit() {
   const { id } = useParams();

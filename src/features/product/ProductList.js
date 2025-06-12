@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import "./product.css";
 
-const API_URL = "http://localhost:8001/";
+const API_URL = process.env.REACT_APP_SAPI_API;
 
 function ProductList() {
   const [products, setProducts] = useState([]);
