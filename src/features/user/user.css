@@ -3,123 +3,294 @@
   padding: 40px 24px;
   min-height: 100vh;
   background: linear-gradient(120deg, #e8f5e9 60%, #b2dfdb 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* User Particle Animation - No Rotation */
+.userlist-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* background: radial-gradient(
+      circle at 15% 40%,
+      rgba(171, 233, 220, 0.4) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      circle at 85% 30%,
+      rgba(22, 160, 133, 0.3) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 60% 80%,
+      rgba(26, 188, 156, 0.2) 0%,
+      transparent 70%
+    ); */
+  animation: userParticleFloat 18s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.userlist-container::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: radial-gradient(
+      circle at 20% 20%,
+      rgba(26, 188, 156, 0.15) 2px,
+      transparent 2px
+    ),
+    radial-gradient(
+      circle at 40% 60%,
+      rgba(26, 188, 156, 0.1) 1px,
+      transparent 1px
+    ),
+    radial-gradient(
+      circle at 80% 40%,
+      rgba(26, 188, 156, 0.2) 1.5px,
+      transparent 1.5px
+    ),
+    radial-gradient(
+      circle at 10% 80%,
+      rgba(26, 188, 156, 0.1) 1px,
+      transparent 1px
+    );
+  background-size: 120px 120px, 80px 80px, 160px 160px, 200px 200px;
+  animation: userParticleMove 12s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes userParticleFloat {
+  0%,
+  100% {
+    transform: translate(0, 0);
+    opacity: 0.7;
+  }
+  25% {
+    transform: translate(-10px, -15px);
+    opacity: 0.9;
+  }
+  50% {
+    transform: translate(15px, 10px);
+    opacity: 0.5;
+  }
+  75% {
+    transform: translate(-5px, 20px);
+    opacity: 0.8;
+  }
+}
+
+@keyframes userParticleMove {
+  0% {
+    transform: translateX(0) translateY(0);
+  }
+  25% {
+    transform: translateX(-30px) translateY(20px);
+  }
+  50% {
+    transform: translateX(20px) translateY(-15px);
+  }
+  75% {
+    transform: translateX(-10px) translateY(25px);
+  }
+  100% {
+    transform: translateX(0) translateY(0);
+  }
 }
 
 .userlist-title {
-  font-size: 2.2rem;
-  font-weight: 700;
-  color: #16896a;
-  margin-bottom: 32px;
-  letter-spacing: 1px;
-  text-shadow: 0 2px 8px rgba(22, 137, 106, 0.08);
+  font-size: 2.8rem;
+  font-weight: 900;
+  background: linear-gradient(135deg, #1abc9c, #16a085);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 40px;
+  letter-spacing: 2px;
+  text-shadow: 0 4px 20px rgba(26, 188, 156, 0.3);
+  position: relative;
+  z-index: 1;
 }
 
-/* Table Container */
 .userlist-table-container {
-  background: #fff;
-  border-radius: 18px;
-  box-shadow: 0 2px 16px rgba(22, 137, 106, 0.08);
-  padding: 28px 18px;
-  overflow-x: auto;
+  background: linear-gradient(145deg, #ffffff, #f8f9fa);
+  border-radius: 24px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+  padding: 32px 24px;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  z-index: 1;
 }
 
-/* Table */
+.userlist-table-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 6px;
+  background: linear-gradient(90deg, #1abc9c, #16a085);
+}
+
 .userlist-table {
   width: 100%;
   border-collapse: collapse;
   font-size: 1rem;
-  color: #222;
-  background: #fff;
-}
-
-.userlist-table th,
-.userlist-table td {
-  padding: 14px 12px;
-  text-align: left;
+  color: #2c3e50;
+  background: transparent;
+  overflow: hidden;
+  border-radius: 16px;
 }
 
 .userlist-table th {
-  background: #1abc9c;
+  background: linear-gradient(135deg, #1abc9c, #16a085);
   color: #fff;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 20px 16px;
+  text-align: left;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  position: relative;
 }
 
-.userlist-table tr {
-  border-bottom: 1px solid #e0f2f1;
-  transition: background 0.18s;
+.userlist-table th:first-child {
+  border-radius: 16px 0 0 0;
 }
 
-.userlist-table tr:hover {
-  background: #e0f7fa;
+.userlist-table th:last-child {
+  border-radius: 0 16px 0 0;
 }
 
 .userlist-table td {
-  vertical-align: middle;
+  padding: 18px 16px;
+  border-bottom: 1px solid rgba(224, 242, 241, 0.6);
+  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.8);
 }
 
-/* Action Buttons */
+.userlist-table tr:hover td {
+  background: linear-gradient(
+    90deg,
+    rgba(26, 188, 156, 0.1),
+    rgba(255, 255, 255, 0.9)
+  );
+  transform: scale(1.01);
+}
+
+.userlist-table tr:last-child td:first-child {
+  border-radius: 0 0 0 16px;
+}
+
+.userlist-table tr:last-child td:last-child {
+  border-radius: 0 0 16px 0;
+}
+
 .userlist-action-btn {
   border: none;
   outline: none;
-  background: #16a085;
+  background: linear-gradient(135deg, #16a085, #1abc9c);
   color: #fff;
-  padding: 7px 18px;
-  border-radius: 6px;
-  font-size: 0.97rem;
+  padding: 12px 20px;
+  border-radius: 12px;
+  font-size: 0.9rem;
   margin-right: 8px;
   cursor: pointer;
-  transition: background 0.18s, filter 0.18s;
-  font-weight: 500;
-  box-shadow: 0 2px 8px rgba(22, 137, 106, 0.08);
-}
-
-.user-create {
-  width: 100%;
-  max-width: 420px;
-  background: #1abc9c;
-  color: #fff;
-  border: none;
-  border-radius: 7px;
-  padding: 12px 0;
-  font-size: 1.08rem;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   font-weight: 600;
-  cursor: pointer;
-  margin-bottom: 12px;
-  transition: background 0.18s;
+  text-transform: uppercase;
   letter-spacing: 0.5px;
+  box-shadow: 0 4px 15px rgba(22, 160, 133, 0.3);
 }
 
 .userlist-action-btn.edit {
-  background: #27ae60;
+  background: linear-gradient(135deg, #27ae60, #2ecc71);
+  box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
 }
 
 .userlist-action-btn.delete {
-  background: #e74c3c;
+  background: linear-gradient(135deg, #e74c3c, #c0392b);
+  box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
 }
 
 .userlist-action-btn:hover {
-  filter: brightness(1.1);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
-/* Responsive */
+.user-create {
+  background: linear-gradient(135deg, #1abc9c, #16a085);
+  color: #fff;
+  border: none;
+  border-radius: 16px;
+  padding: 16px 32px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  margin-bottom: 32px;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  box-shadow: 0 8px 20px rgba(26, 188, 156, 0.3);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.user-create::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: left 0.5s;
+}
+
+.user-create:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 12px 30px rgba(26, 188, 156, 0.4);
+}
+
+.user-create:hover::before {
+  left: 100%;
+}
+
 @media (max-width: 900px) {
   .userlist-container {
     margin-left: 0;
-    padding: 18px 4vw;
+    padding: 24px 16px;
   }
+
+  .userlist-table-container {
+    padding: 20px 12px;
+    overflow-x: auto;
+  }
+
   .userlist-table th,
   .userlist-table td {
-    padding: 10px 6px;
-    font-size: 0.97rem;
+    padding: 12px 8px;
+    font-size: 0.9rem;
   }
-  .user-form-container {
-    padding: 18px 6px;
-  }
-  .user-form-fields {
-    flex-direction: column;
-    gap: 8px;
+
+  .userlist-action-btn {
+    padding: 8px 12px;
+    font-size: 0.8rem;
+    margin-right: 4px;
   }
 }
