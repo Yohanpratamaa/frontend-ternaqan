@@ -85,7 +85,9 @@ function ProductEdit() {
 
   return (
     <div className="product-container">
-      <h2 className="product-title">Edit Sapi</h2>
+      <h2 className="product-title" style={{ textAlign: "center" }}>
+        Edit Sapi
+      </h2>
       <ProductForm
         onSubmit={handleSubmit}
         initialData={initialData}

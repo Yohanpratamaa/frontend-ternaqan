@@ -81,7 +81,9 @@ function UserEdit() {
 
   return (
     <div className="user-container">
-      <h2 className="userlist-title">Edit Admin</h2>
+      <h2 className="userlist-title" style={{ textAlign: "center" }}>
+        Edit Admin
+      </h2>
       <UserForm
         onSubmit={handleSubmit}
         initialData={initialData}

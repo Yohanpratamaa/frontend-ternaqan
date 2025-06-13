@@ -45,7 +45,9 @@ function PeternakCreate() {
 
   return (
     <div className="peternak-container">
-      <h2 className="peternak-title">Tambah Peternak</h2>
+      <h2 className="peternak-title" style={{ textAlign: "center" }}>
+        Tambah Peternak
+      </h2>
       <PeternakForm
         onSubmit={handleSubmit}
         onCancel={() => navigate("/peternak")}

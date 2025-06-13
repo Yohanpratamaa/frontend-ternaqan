@@ -84,7 +84,9 @@ function PeternakEdit() {
 
   return (
     <div className="peternak-container">
-      <h2 className="peternak-title">Edit Peternak</h2>
+      <h2 className="peternak-title" style={{ textAlign: "center" }}>
+        Edit Peternak
+      </h2>
       <PeternakForm
         onSubmit={handleSubmit}
         initialData={initialData}

@@ -46,7 +46,9 @@ function UserCreate() {
 
   return (
     <div className="user-container">
-      <h2 className="user-title">Create Admin</h2>
+      <h2 className="user-title" style={{ textAlign: "center" }}>
+        Create Admin
+      </h2>
       <UserForm
         onSubmit={handleSubmit}
         onCancel={() => navigate("/user/list")}

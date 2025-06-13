@@ -50,7 +50,7 @@ function ProductCreate() {
 
   return (
     <div className="product-container">
-      <h2 className="product-title">Tambah Sapi</h2>
+      <h2 className="product-title" style={{ textAlign: "center" }}>Tambah Sapi</h2>
       <ProductForm
         onSubmit={handleSubmit}
         onCancel={() => navigate("/product")}
