@@ -249,8 +249,9 @@
 }
 
 .transactions-create:hover {
-  transform: translateY(-4px) scale(1.02);
-  box-shadow: 0 12px 30px rgba(155, 89, 182, 0.4);
+  background: linear-gradient(135deg, #2980b9, #3498db) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
 }
 
 .transactions-create:hover::before {
@@ -357,6 +358,7 @@
   margin-bottom: 20px;
 }
 
+/* Loading animation for update button */
 @keyframes spin {
   0% {
     transform: rotate(0deg);
@@ -364,6 +366,34 @@
   100% {
     transform: rotate(360deg);
   }
+}
+
+.transactions-action-btn:disabled {
+  opacity: 0.8;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+.transactions-action-btn:disabled:hover {
+  transform: none !important;
+}
+
+/* Enhanced status completed styling */
+.status-completed {
+  color: #27ae60;
+  font-weight: 600;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  justify-content: center;
+}
+
+/* Refresh button hover effect */
+.transactions-create:hover {
+  background: linear-gradient(135deg, #2980b9, #3498db) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
 }
 
 /* Empty state */
@@ -384,6 +414,50 @@
 .transactions-empty p {
   font-size: 1.1rem;
   margin-bottom: 24px;
+}
+
+/* Vendor info styling */
+.vendor-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.vendor-name {
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 2px;
+}
+
+.vendor-contact {
+  font-size: 0.8rem;
+  color: #7f8c8d;
+}
+
+/* Loading state for individual buttons */
+.transactions-action-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+.transactions-action-btn:disabled:hover {
+  transform: none !important;
+  box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
+}
+
+/* Update loading animation */
+@keyframes buttonPulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.transactions-action-btn:disabled {
+  animation: buttonPulse 1.5s ease-in-out infinite;
 }
 
 /* Responsive design */
@@ -440,6 +514,28 @@
 
   .amount-cell,
   .date-cell {
+    font-size: 0.8rem;
+  }
+
+  .vendor-info {
+    font-size: 0.9rem;
+  }
+
+  .vendor-name {
+    font-size: 0.9rem;
+  }
+
+  .vendor-contact {
+    font-size: 0.7rem;
+  }
+
+  .status-completed {
+    font-size: 0.8rem;
+  }
+
+  .transactions-action-btn {
+    min-width: 80px !important;
+    padding: 8px 12px;
     font-size: 0.8rem;
   }
 }
