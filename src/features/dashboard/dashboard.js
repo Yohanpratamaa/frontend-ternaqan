@@ -316,37 +316,30 @@ const Dashboard = () => {
     },
   };
 
+  // ...existing code...
+
   if (loading) {
     return (
       <div className="dashboard-root">
         <h2 className="dashboard-title">Dashboard</h2>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            height: "300px",
-            fontSize: "1.2rem",
-            color: "#7f8c8d",
-            flexDirection: "column",
-            gap: "20px",
-          }}
-        >
-          <div
-            style={{
-              width: "50px",
-              height: "50px",
-              border: "4px solid rgba(155, 89, 182, 0.3)",
-              borderTop: "4px solid #9b59b6",
-              borderRadius: "50%",
-              animation: "spin 1s linear infinite",
-            }}
-          ></div>
-          <div>Loading dashboard data...</div>
+
+        {/* PERBAIKAN: Loading state yang lebih baik */}
+        <div className="dashboard-loading-wrapper">
+          <div className="dashboard-loading-content">
+            <div className="dashboard-loading-spinner"></div>
+            <div className="dashboard-loading-text">
+              Memuat data dashboard...
+            </div>
+            <div className="dashboard-loading-subtext">
+              Mengambil data dari semua modul
+            </div>
+          </div>
         </div>
       </div>
     );
   }
+
+  // ...existing code...
 
   return (
     <div className="dashboard-root">

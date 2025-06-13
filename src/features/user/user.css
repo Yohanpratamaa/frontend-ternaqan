@@ -272,55 +272,175 @@
 }
 
 /* Loading state */
-.userlist-loading {
-  text-align: center;
-  padding: 60px 20px;
-  color: #7f8c8d;
-  font-size: 1.2rem;
-  font-weight: 600;
+.userlist-loading-wrapper {
+  background: linear-gradient(145deg, #ffffff, #f8f9fa);
+  border-radius: 24px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+  padding: 60px 40px;
+  margin-top: 40px;
   position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.18);
   z-index: 1;
+  text-align: center;
 }
 
-.userlist-loading::before {
+.userlist-loading-wrapper::before {
   content: "";
-  display: inline-block;
-  width: 40px;
-  height: 40px;
-  border: 4px solid rgba(26, 188, 156, 0.3);
-  border-top: 4px solid #1abc9c;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-  margin-bottom: 20px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 6px;
+  background: linear-gradient(90deg, #1abc9c, #16a085);
+  border-radius: 24px 24px 0 0;
 }
 
-@keyframes spin {
+.userlist-loading-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.userlist-loading-spinner {
+  width: 60px;
+  height: 60px;
+  border: 4px solid rgba(26, 188, 156, 0.1);
+  border-top: 4px solid #1abc9c;
+  border-right: 4px solid #16a085;
+  border-radius: 50%;
+  animation: userLoadingSpinner 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55)
+    infinite;
+  position: relative;
+}
+
+.userlist-loading-spinner::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  background: linear-gradient(135deg, #1abc9c, #16a085);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  animation: userLoadingPulse 1.5s ease-in-out infinite;
+}
+
+.userlist-loading-text {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #2c3e50;
+  letter-spacing: 0.5px;
+}
+
+.userlist-loading-subtext {
+  font-size: 1rem;
+  color: #7f8c8d;
+  font-weight: 500;
+}
+
+@keyframes userLoadingSpinner {
   0% {
     transform: rotate(0deg);
+    border-top-color: #1abc9c;
+    border-right-color: #16a085;
+  }
+  25% {
+    border-top-color: #16a085;
+    border-right-color: #1abc9c;
+  }
+  50% {
+    transform: rotate(180deg);
+    border-top-color: #1abc9c;
+    border-right-color: #16a085;
+  }
+  75% {
+    border-top-color: #16a085;
+    border-right-color: #1abc9c;
   }
   100% {
     transform: rotate(360deg);
+    border-top-color: #1abc9c;
+    border-right-color: #16a085;
   }
 }
 
-/* Empty state */
-.userlist-empty {
-  text-align: center;
-  padding: 80px 20px;
-  color: #95a5a6;
-  position: relative;
-  z-index: 1;
+@keyframes userLoadingPulse {
+  0%,
+  100% {
+    opacity: 0.8;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.2);
+  }
 }
 
-.userlist-empty h3 {
-  font-size: 1.5rem;
-  margin-bottom: 16px;
-  color: #7f8c8d;
+/* HAPUS: Loading state lama */
+.userlist-loading {
+  display: none; /* Hide old loading style */
 }
 
-.userlist-empty p {
-  font-size: 1.1rem;
-  margin-bottom: 24px;
+.userlist-loading::before {
+  display: none; /* Hide old loading spinner */
+}
+
+/* PERBAIKAN: Responsive loading */
+@media (max-width: 768px) {
+  .userlist-loading-wrapper {
+    padding: 40px 20px;
+    margin-top: 20px;
+  }
+
+  .userlist-loading-spinner {
+    width: 50px;
+    height: 50px;
+    border-width: 3px;
+  }
+
+  .userlist-loading-spinner::after {
+    width: 16px;
+    height: 16px;
+  }
+
+  .userlist-loading-text {
+    font-size: 1.1rem;
+  }
+
+  .userlist-loading-subtext {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .userlist-loading-wrapper {
+    padding: 30px 16px;
+  }
+
+  .userlist-loading-content {
+    gap: 16px;
+  }
+
+  .userlist-loading-spinner {
+    width: 40px;
+    height: 40px;
+    border-width: 3px;
+  }
+
+  .userlist-loading-spinner::after {
+    width: 12px;
+    height: 12px;
+  }
+
+  .userlist-loading-text {
+    font-size: 1rem;
+  }
+
+  .userlist-loading-subtext {
+    font-size: 0.8rem;
+  }
 }
 
 @media (max-width: 900px) {

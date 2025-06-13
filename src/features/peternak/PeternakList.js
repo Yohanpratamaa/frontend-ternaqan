@@ -84,7 +84,17 @@ function PeternakList() {
     return (
       <div className="peternak-container">
         <h2 className="peternak-title">Peternak List</h2>
-        <div className="peternak-loading">Loading peternak...</div>
+
+        {/* PERBAIKAN: Loading state yang lebih baik */}
+        <div className="peternak-loading-wrapper">
+          <div className="peternak-loading-content">
+            <div className="peternak-loading-spinner"></div>
+            <div className="peternak-loading-text">Memuat data peternak...</div>
+            <div className="peternak-loading-subtext">
+              Mohon tunggu sebentar
+            </div>
+          </div>
+        </div>
       </div>
     );
   }

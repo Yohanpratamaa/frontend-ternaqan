@@ -283,41 +283,220 @@
   text-transform: uppercase;
 }
 
-@media (max-width: 1200px) {
-  .dashboard-charts-row {
-    grid-template-columns: 1fr;
-    gap: 24px;
+/* PERBAIKAN: Loading state yang lebih baik */
+.dashboard-loading-wrapper {
+  background: linear-gradient(145deg, #ffffff, #f8f9fa);
+  border-radius: 24px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+  padding: 60px 40px;
+  margin-top: 40px;
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  z-index: 1;
+  text-align: center;
+}
+
+.dashboard-loading-wrapper::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 6px;
+  background: linear-gradient(
+    90deg,
+    #1abc9c,
+    #16a085,
+    #3498db,
+    #2980b9,
+    #9b59b6,
+    #8e44ad
+  );
+  background-size: 400% 100%;
+  border-radius: 24px 24px 0 0;
+  animation: dashboardLoadingGradient 3s ease-in-out infinite;
+}
+
+.dashboard-loading-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.dashboard-loading-spinner {
+  width: 80px;
+  height: 80px;
+  border: 5px solid rgba(26, 188, 156, 0.1);
+  border-top: 5px solid #1abc9c;
+  border-right: 5px solid #3498db;
+  border-bottom: 5px solid #9b59b6;
+  border-left: 5px solid #f39c12;
+  border-radius: 50%;
+  animation: dashboardLoadingSpinner 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55)
+    infinite;
+  position: relative;
+}
+
+.dashboard-loading-spinner::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 30px;
+  height: 30px;
+  background: linear-gradient(135deg, #1abc9c, #3498db, #9b59b6, #f39c12);
+  background-size: 400% 400%;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  animation: dashboardLoadingPulse 2s ease-in-out infinite,
+    dashboardLoadingGradient 3s ease-in-out infinite;
+}
+
+.dashboard-loading-text {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #2c3e50;
+  letter-spacing: 0.5px;
+}
+
+.dashboard-loading-subtext {
+  font-size: 1rem;
+  color: #7f8c8d;
+  font-weight: 500;
+}
+
+@keyframes dashboardLoadingSpinner {
+  0% {
+    transform: rotate(0deg);
+    border-top-color: #1abc9c;
+    border-right-color: #3498db;
+    border-bottom-color: #9b59b6;
+    border-left-color: #f39c12;
+  }
+  25% {
+    border-top-color: #3498db;
+    border-right-color: #9b59b6;
+    border-bottom-color: #f39c12;
+    border-left-color: #1abc9c;
+  }
+  50% {
+    transform: rotate(180deg);
+    border-top-color: #9b59b6;
+    border-right-color: #f39c12;
+    border-bottom-color: #1abc9c;
+    border-left-color: #3498db;
+  }
+  75% {
+    border-top-color: #f39c12;
+    border-right-color: #1abc9c;
+    border-bottom-color: #3498db;
+    border-left-color: #9b59b6;
+  }
+  100% {
+    transform: rotate(360deg);
+    border-top-color: #1abc9c;
+    border-right-color: #3498db;
+    border-bottom-color: #9b59b6;
+    border-left-color: #f39c12;
   }
 }
 
-@media (max-width: 900px) {
-  .dashboard-root {
-    margin-left: 0;
-    padding: 24px 16px;
+@keyframes dashboardLoadingPulse {
+  0%,
+  100% {
+    opacity: 0.8;
+    transform: translate(-50%, -50%) scale(1);
   }
-
-  .dashboard-cards {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-
-  .dashboard-title {
-    font-size: 2.5rem;
-    margin-bottom: 32px;
-  }
-
-  .dashboard-chart-container {
-    padding: 24px 20px;
+  50% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.3);
   }
 }
 
+@keyframes dashboardLoadingGradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* HAPUS: Loading state lama */
+.dashboard-loading {
+  display: none; /* Hide old loading style */
+}
+
+.dashboard-loading::before {
+  display: none; /* Hide old loading spinner */
+}
+
+/* PERBAIKAN: Responsive loading */
 @media (max-width: 768px) {
-  .dashboard-card-value {
-    font-size: 2.8rem;
+  .dashboard-loading-wrapper {
+    padding: 40px 20px;
+    margin-top: 20px;
   }
 
-  .dashboard-card {
-    padding: 24px 20px;
-    min-height: 140px;
+  .dashboard-loading-spinner {
+    width: 60px;
+    height: 60px;
+    border-width: 4px;
+  }
+
+  .dashboard-loading-spinner::after {
+    width: 20px;
+    height: 20px;
+  }
+
+  .dashboard-loading-text {
+    font-size: 1.2rem;
+  }
+
+  .dashboard-loading-subtext {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard-loading-wrapper {
+    padding: 30px 16px;
+  }
+
+  .dashboard-loading-content {
+    gap: 16px;
+  }
+
+  .dashboard-loading-spinner {
+    width: 50px;
+    height: 50px;
+    border-width: 3px;
+  }
+
+  .dashboard-loading-spinner::after {
+    width: 16px;
+    height: 16px;
+  }
+
+  .dashboard-loading-text {
+    font-size: 1.1rem;
+  }
+
+  .dashboard-loading-subtext {
+    font-size: 0.8rem;
+  }
+}
+
+/* Keyframe untuk spin animation yang digunakan di loading lama */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }

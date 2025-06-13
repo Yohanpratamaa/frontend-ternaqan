@@ -57,7 +57,15 @@ const SapiList = () => {
     return (
       <div className="product-container">
         <h2 className="product-title">Sapi List</h2>
-        <div className="product-loading">Loading sapi data...</div>
+
+        {/* PERBAIKAN: Loading state yang lebih baik */}
+        <div className="product-loading-wrapper">
+          <div className="product-loading-content">
+            <div className="product-loading-spinner"></div>
+            <div className="product-loading-text">Memuat data sapi...</div>
+            <div className="product-loading-subtext">Mohon tunggu sebentar</div>
+          </div>
+        </div>
       </div>
     );
   }

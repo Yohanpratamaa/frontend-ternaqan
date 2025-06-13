@@ -86,7 +86,17 @@ function UserList({ onEdit }) {
     return (
       <div className="userlist-container">
         <h2 className="userlist-title">Admin List</h2>
-        <div className="userlist-loading">Loading users...</div>
+
+        {/* PERBAIKAN: Loading state yang lebih baik */}
+        <div className="userlist-loading-wrapper">
+          <div className="userlist-loading-content">
+            <div className="userlist-loading-spinner"></div>
+            <div className="userlist-loading-text">Memuat data admin...</div>
+            <div className="userlist-loading-subtext">
+              Mohon tunggu sebentar
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
