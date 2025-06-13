@@ -1,9 +1,9 @@
 import React from "react";
+import TransactionsList from "./TransactionsList";
+import "./transactions.css";
+
 function Transactions() {
-  return (
-    <div style={{ marginLeft: 320, padding: 20 }}>
-      <h2>Transactions Page</h2>
-    </div>
-  );
+  return <TransactionsList />;
 }
+
 export default Transactions;

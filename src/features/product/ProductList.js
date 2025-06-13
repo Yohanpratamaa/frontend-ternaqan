@@ -76,24 +76,49 @@ function ProductList() {
     });
   };
 
+  if (loading) {
+    return (
+      <div className="product-container">
+        <h2 className="product-title">Sapi List</h2>
+        <div className="product-loading">Loading products...</div>
+      </div>
+    );
+  }
+
+  if (products.length === 0) {
+    return (
+      <div className="product-container">
+        <h2 className="product-title">Sapi List</h2>
+        <button
+          className="product-create"
+          onClick={() => navigate("/product/create")}
+        >
+          + Tambah Sapi
+        </button>
+        <div className="product-empty">
+          <h3>Tidak ada data sapi</h3>
+          <p>
+            Belum ada data sapi yang tercatat dalam sistem. Silakan tambah data
+            sapi baru.
+          </p>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <>
+    <div className="product-container">
       <h2 className="product-title">Sapi List</h2>
       <button
-        className="product-form-btn"
-        style={{ maxWidth: 220, marginBottom: 24 }}
+        className="product-create"
         onClick={() => navigate("/product/create")}
       >
         + Tambah Sapi
       </button>
-      {loading ? (
-        <p>Loading...</p>
-      ) : (
-        <div className="product-table-container">
-          <ProductTable products={products} onDelete={handleDelete} />
-        </div>
-      )}
-    </>
+      <div className="product-table-container">
+        <ProductTable products={products} onDelete={handleDelete} />
+      </div>
+    </div>
   );
 }
 

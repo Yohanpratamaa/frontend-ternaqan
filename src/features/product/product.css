@@ -1,7 +1,7 @@
 .product-container {
-  margin-left: 270px;
-  padding: 40px 24px;
-  min-height: 100vh;
+  margin-left: 130px;
+  padding: 10px 24px;
+  min-height: 95vh;
   background: linear-gradient(120deg, #e8f5e9 60%, #b2dfdb 100%);
   position: relative;
   overflow: hidden;
@@ -15,26 +15,6 @@
   left: 0;
   right: 0;
   bottom: 0;
-  /* background: radial-gradient(
-      circle at 25% 25%,
-      rgba(176, 210, 233, 0.4) 0%,
-      transparent 50%
-    ),
-    radial-gradient(
-      circle at 75% 75%,
-      rgba(142, 164, 179, 0.3) 0%,
-      transparent 60%
-    ),
-    radial-gradient(
-      circle at 50% 10%,
-      rgba(52, 152, 219, 0.2) 0%,
-      transparent 40%
-    ),
-    radial-gradient(
-      circle at 10% 90%,
-      rgba(41, 128, 185, 0.3) 0%,
-      transparent 50%
-    ); */
   animation: productParticleFlow 16s ease-in-out infinite;
   pointer-events: none;
   z-index: 0;
@@ -172,6 +152,39 @@
   border-bottom: 1px solid rgba(224, 242, 241, 0.6);
   transition: all 0.3s ease;
   background: rgba(255, 255, 255, 0.8);
+}
+
+/* Price cell styling */
+.price-cell {
+  font-weight: 700;
+  color: #27ae60;
+  background: linear-gradient(
+    135deg,
+    rgba(39, 174, 96, 0.1),
+    rgba(46, 204, 113, 0.05)
+  );
+  border-radius: 8px;
+  text-align: right;
+  font-family: "Courier New", monospace;
+  letter-spacing: 0.5px;
+}
+
+.product-table tbody tr:hover .price-cell {
+  color: #2ecc71;
+  background: linear-gradient(
+    135deg,
+    rgba(39, 174, 96, 0.15),
+    rgba(46, 204, 113, 0.08)
+  );
+  transform: scale(1.02);
+}
+
+/* Number formatting untuk kolom numerik */
+.product-table td:nth-child(3),
+.product-table td:nth-child(4) {
+  text-align: right;
+  font-weight: 600;
+  font-family: "Courier New", monospace;
 }
 
 .product-table tr:hover td {
@@ -385,6 +398,58 @@
 
 .product-form-btn.cancel:hover {
   box-shadow: 0 12px 30px rgba(149, 165, 166, 0.4);
+}
+
+/* Loading state */
+.product-loading {
+  text-align: center;
+  padding: 60px 20px;
+  color: #7f8c8d;
+  font-size: 1.2rem;
+  font-weight: 600;
+  position: relative;
+  z-index: 1;
+}
+
+.product-loading::before {
+  content: "";
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(52, 152, 219, 0.3);
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 20px;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Empty state */
+.product-empty {
+  text-align: center;
+  padding: 80px 20px;
+  color: #95a5a6;
+  position: relative;
+  z-index: 1;
+}
+
+.product-empty h3 {
+  font-size: 1.5rem;
+  margin-bottom: 16px;
+  color: #7f8c8d;
+}
+
+.product-empty p {
+  font-size: 1.1rem;
+  margin-bottom: 24px;
 }
 
 @media (max-width: 900px) {

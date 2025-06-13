@@ -1,7 +1,7 @@
 .userlist-container {
   margin-left: 270px;
-  padding: 40px 24px;
-  min-height: 100vh;
+  padding: 20px 24px;
+  min-height: 95vh;
   background: linear-gradient(120deg, #e8f5e9 60%, #b2dfdb 100%);
   position: relative;
   overflow: hidden;
@@ -269,6 +269,58 @@
 
 .user-create:hover::before {
   left: 100%;
+}
+
+/* Loading state */
+.userlist-loading {
+  text-align: center;
+  padding: 60px 20px;
+  color: #7f8c8d;
+  font-size: 1.2rem;
+  font-weight: 600;
+  position: relative;
+  z-index: 1;
+}
+
+.userlist-loading::before {
+  content: "";
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(26, 188, 156, 0.3);
+  border-top: 4px solid #1abc9c;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 20px;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Empty state */
+.userlist-empty {
+  text-align: center;
+  padding: 80px 20px;
+  color: #95a5a6;
+  position: relative;
+  z-index: 1;
+}
+
+.userlist-empty h3 {
+  font-size: 1.5rem;
+  margin-bottom: 16px;
+  color: #7f8c8d;
+}
+
+.userlist-empty p {
+  font-size: 1.1rem;
+  margin-bottom: 24px;
 }
 
 @media (max-width: 900px) {

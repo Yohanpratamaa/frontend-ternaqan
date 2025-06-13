@@ -33,7 +33,7 @@ function UserList({ onEdit }) {
     })
       .then((res) => res.json())
       .then((result) => {
-        setAdmins(result.data.admins);
+        setAdmins(result.data.admins || []);
         setLoading(false);
       })
       .catch(() => setLoading(false));
@@ -82,27 +82,49 @@ function UserList({ onEdit }) {
     if (onEdit) onEdit(admin);
   };
 
+  if (loading) {
+    return (
+      <div className="userlist-container">
+        <h2 className="userlist-title">Admin List</h2>
+        <div className="userlist-loading">Loading users...</div>
+      </div>
+    );
+  }
+
+  if (admins.length === 0) {
+    return (
+      <div className="userlist-container">
+        <h2 className="userlist-title">Admin List</h2>
+        <button
+          className="user-create"
+          onClick={() => navigate("/user/create")}
+        >
+          + Tambah Admin
+        </button>
+        <div className="userlist-empty">
+          <h3>Tidak ada data admin</h3>
+          <p>
+            Belum ada admin yang terdaftar dalam sistem. Silakan tambah admin
+            baru.
+          </p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="userlist-container">
       <h2 className="userlist-title">Admin List</h2>
-      <button
-        className="user-create"
-        style={{ maxWidth: 220, marginBottom: 24 }}
-        onClick={() => navigate("/user/create")}
-      >
+      <button className="user-create" onClick={() => navigate("/user/create")}>
         + Tambah Admin
       </button>
-      {loading ? (
-        <p>Loading...</p>
-      ) : (
-        <div className="userlist-table-container">
-          <UserTable
-            admins={admins}
-            onEdit={handleEdit}
-            onDelete={handleDelete}
-          />
-        </div>
-      )}
+      <div className="userlist-table-container">
+        <UserTable
+          admins={admins}
+          onEdit={handleEdit}
+          onDelete={handleDelete}
+        />
+      </div>
     </div>
   );
 }

@@ -53,38 +53,57 @@ const SapiList = () => {
     fetchSapis();
   }, []);
 
-  return (
-    <>
-      <h2 className="product-title">Sapi List</h2>
-      {loading ? (
-        <p>Loading...</p>
-      ) : (
-        <div className="product-table-container">
-          <table className="product-table">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Umur</th>
-                <th>Berat</th>
-                <th>Stok</th>
-                <th>Harga</th>
-              </tr>
-            </thead>
-            <tbody>
-              {sapis.map((sapi) => (
-                <tr key={sapi.id}>
-                  <td>{sapi.id}</td>
-                  <td>{sapi.umur} Tahun</td>
-                  <td>{formatNumber(sapi.berat)} Kg</td>
-                  <td>{formatNumber(sapi.stok)} Ekor</td>
-                  <td className="price-cell">{formatIDR(sapi.harga)}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+  if (loading) {
+    return (
+      <div className="product-container">
+        <h2 className="product-title">Sapi List</h2>
+        <div className="product-loading">Loading sapi data...</div>
+      </div>
+    );
+  }
+
+  if (sapis.length === 0) {
+    return (
+      <div className="product-container">
+        <h2 className="product-title">Sapi List</h2>
+        <div className="product-empty">
+          <h3>Tidak ada data sapi</h3>
+          <p>Belum ada data sapi yang tersedia dalam sistem.</p>
         </div>
-      )}
-    </>
+      </div>
+    );
+  }
+
+  return (
+    <div className="product-container">
+      <h2 className="product-title">Sapi List</h2>
+      <div className="product-table-container">
+        <table className="product-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Umur</th>
+              <th>Berat</th>
+              <th>Stok</th>
+              <th>Harga</th>
+            </tr>
+          </thead>
+          <tbody>
+            {sapis.map((sapi) => (
+              <tr key={sapi.id}>
+                <td>
+                  <strong>{sapi.id}</strong>
+                </td>
+                <td>{sapi.umur} Tahun</td>
+                <td>{formatNumber(sapi.berat)} Kg</td>
+                <td>{formatNumber(sapi.stok)} Ekor</td>
+                <td className="price-cell">{formatIDR(sapi.harga)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
   );
 };
 

@@ -80,24 +80,49 @@ function PeternakList() {
     });
   };
 
+  if (loading) {
+    return (
+      <div className="peternak-container">
+        <h2 className="peternak-title">Peternak List</h2>
+        <div className="peternak-loading">Loading peternak...</div>
+      </div>
+    );
+  }
+
+  if (peternaks.length === 0) {
+    return (
+      <div className="peternak-container">
+        <h2 className="peternak-title">Peternak List</h2>
+        <button
+          className="peternak-create"
+          onClick={() => navigate("/peternak/create")}
+        >
+          + Tambah Peternak
+        </button>
+        <div className="peternak-empty">
+          <h3>Tidak ada data peternak</h3>
+          <p>
+            Belum ada peternak yang terdaftar dalam sistem. Silakan tambah
+            peternak baru.
+          </p>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <>
+    <div className="peternak-container">
       <h2 className="peternak-title">Peternak List</h2>
       <button
-        className="peternak-form-btn"
-        style={{ maxWidth: 220, marginBottom: 24 }}
+        className="peternak-create"
         onClick={() => navigate("/peternak/create")}
       >
         + Tambah Peternak
       </button>
-      {loading ? (
-        <p>Loading...</p>
-      ) : (
-        <div className="peternak-table-container">
-          <PeternakTable peternaks={peternaks} onDelete={handleDelete} />
-        </div>
-      )}
-    </>
+      <div className="peternak-table-container">
+        <PeternakTable peternaks={peternaks} onDelete={handleDelete} />
+      </div>
+    </div>
   );
 }
 
