@@ -365,11 +365,14 @@ const TransactionsList = () => {
       showCancelButton: true,
       confirmButtonText: "🔄 Ya, Refresh",
       cancelButtonText: "Batal",
-      confirmButtonColor: "#3498db",
+      confirmButtonColor: "#9b59b6", // Gunakan warna ungu
       cancelButtonColor: "#95a5a6",
     });
 
     if (result.isConfirmed) {
+      // Set loading state
+      setLoading(true);
+
       fetchTransactions();
 
       // Show success message after refresh
@@ -381,6 +384,7 @@ const TransactionsList = () => {
           timer: 1500,
           showConfirmButton: false,
           timerProgressBar: true,
+          confirmButtonColor: "#9b59b6", // Gunakan warna ungu
         });
       }, 100);
     }
@@ -440,23 +444,50 @@ const TransactionsList = () => {
         </div>
       )}
 
-      {/* Refresh Button */}
+      {/* ALTERNATIF: Refresh Button dengan inline style ungu */}
       <div style={{ marginBottom: "20px" }}>
         <button
           onClick={refreshTransactions}
-          className="transactions-create"
           style={{
-            background: "linear-gradient(135deg, #3498db, #2980b9)",
+            background: "linear-gradient(135deg, #9b59b6, #8e44ad)",
             color: "white",
-            padding: "12px 24px",
+            padding: "16px 32px",
             border: "none",
-            borderRadius: "8px",
+            borderRadius: "16px",
             cursor: "pointer",
-            fontWeight: "600",
-            fontSize: "0.9rem",
+            fontWeight: "700",
+            fontSize: "1.1rem",
+            letterSpacing: "1px",
+            textTransform: "uppercase",
+            boxShadow: "0 8px 20px rgba(155, 89, 182, 0.3)",
+            transition: "all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)",
+            display: "inline-flex",
+            alignItems: "center",
+            gap: "8px",
           }}
+          onMouseEnter={(e) => {
+            e.target.style.transform = "translateY(-3px) scale(1.02)";
+            e.target.style.boxShadow = "0 12px 25px rgba(155, 89, 182, 0.4)";
+            e.target.style.background =
+              "linear-gradient(135deg, #8e44ad, #9b59b6)";
+          }}
+          onMouseLeave={(e) => {
+            e.target.style.transform = "translateY(0) scale(1)";
+            e.target.style.boxShadow = "0 8px 20px rgba(155, 89, 182, 0.3)";
+            e.target.style.background =
+              "linear-gradient(135deg, #9b59b6, #8e44ad)";
+          }}
+          disabled={loading}
         >
-          🔄 Refresh Data
+          <span
+            style={{
+              display: "inline-block",
+              animation: loading ? "refreshRotate 1s linear infinite" : "none",
+            }}
+          >
+            🔄
+          </span>
+          {loading ? "Refreshing..." : "Refresh Data"}
         </button>
       </div>
 
