@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Swal from "sweetalert2";
 import "./transactions.css";
 
 const API_URL = process.env.REACT_APP_TRANSACTIONS_API;
@@ -125,6 +126,22 @@ const TransactionsList = () => {
       console.error("Error fetching vendor transactions:", error);
       setError(error.message);
 
+      // PERBAIKAN: Ganti alert dengan SweetAlert untuk error
+      await Swal.fire({
+        icon: "warning",
+        title: "Gagal Memuat Data",
+        html: `
+          <p>Terjadi kesalahan saat memuat data transaksi:</p>
+          <p><strong>${error.message}</strong></p>
+          <p>Menggunakan data mock untuk sementara.</p>
+        `,
+        confirmButtonText: "OK",
+        confirmButtonColor: "#3498db",
+        customClass: {
+          popup: "swal-wide",
+        },
+      });
+
       // Fallback ke mock data jika API gagal
       setTransactions([
         {
@@ -161,6 +178,18 @@ const TransactionsList = () => {
       if (!API_URL) {
         throw new Error("API_URL not configured");
       }
+
+      // Show loading alert
+      Swal.fire({
+        title: "Memproses...",
+        html: "Sedang mengupdate status transaksi",
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+        showConfirmButton: false,
+        didOpen: () => {
+          Swal.showLoading();
+        },
+      });
 
       // PERBAIKAN: Menggunakan mutation updateTransactionStatus dengan parameter transaction_id
       const response = await fetch(API_URL, {
@@ -220,7 +249,19 @@ const TransactionsList = () => {
           )
         );
 
-        alert("Status transaksi berhasil diubah menjadi 'Sudah'");
+        // PERBAIKAN: Ganti alert dengan SweetAlert untuk success
+        await Swal.fire({
+          icon: "success",
+          title: "Berhasil!",
+          html: `
+            <p>Status transaksi berhasil diubah menjadi <strong>"Sudah"</strong></p>
+            <p>ID Transaksi: VTX${String(transactionId).padStart(3, "0")}</p>
+          `,
+          confirmButtonText: "OK",
+          confirmButtonColor: "#27ae60",
+          timer: 3000,
+          timerProgressBar: true,
+        });
       } else {
         throw new Error(
           "Failed to update status - no data returned from updateTransactionStatus"
@@ -229,11 +270,30 @@ const TransactionsList = () => {
     } catch (error) {
       console.error("Error updating status:", error);
 
-      // Jangan langsung update state jika API gagal, beri user feedback yang jelas
+      // PERBAIKAN: Ganti alert dengan SweetAlert untuk error
       if (error.message.includes("GraphQL Error")) {
-        alert(`Gagal mengubah status transaksi: ${error.message}`);
+        await Swal.fire({
+          icon: "error",
+          title: "Gagal Update Status",
+          html: `
+            <p>Terjadi kesalahan GraphQL:</p>
+            <p><strong>${error.message}</strong></p>
+          `,
+          confirmButtonText: "OK",
+          confirmButtonColor: "#e74c3c",
+        });
       } else {
-        alert(`Gagal mengubah status transaksi: ${error.message}`);
+        await Swal.fire({
+          icon: "error",
+          title: "Gagal Update Status",
+          html: `
+            <p>Terjadi kesalahan saat mengupdate status:</p>
+            <p><strong>${error.message}</strong></p>
+          `,
+          footer: "<small>Mencoba mode development...</small>",
+          confirmButtonText: "OK",
+          confirmButtonColor: "#e74c3c",
+        });
 
         // Hanya untuk development/testing - hapus ini di production
         console.log("Attempting mock update for development...");
@@ -244,27 +304,86 @@ const TransactionsList = () => {
               : transaction
           )
         );
-        alert("Status transaksi berhasil diubah (mode development)");
+
+        // Success alert untuk mock update
+        await Swal.fire({
+          icon: "info",
+          title: "Mode Development",
+          html: `
+            <p>Status transaksi berhasil diubah (mode development)</p>
+            <p>ID Transaksi: VTX${String(transactionId).padStart(3, "0")}</p>
+          `,
+          confirmButtonText: "OK",
+          confirmButtonColor: "#3498db",
+          timer: 2000,
+          timerProgressBar: true,
+        });
       }
     } finally {
       setUpdatingId(null);
     }
   };
 
-  // Konfirmasi sebelum mengubah status
-  const handleStatusChange = (transactionId, vendorName) => {
-    const message = `Apakah Anda yakin ingin mengubah status transaksi dari "${vendorName}" menjadi "Sudah"?\n\nTransaksi ID: VTX${String(
-      transactionId
-    ).padStart(3, "0")}`;
+  // PERBAIKAN: Konfirmasi sebelum mengubah status dengan SweetAlert
+  const handleStatusChange = async (transactionId, vendorName) => {
+    const result = await Swal.fire({
+      icon: "question",
+      title: "Konfirmasi Update Status",
+      html: `
+        <div style="text-align: left; margin: 20px 0;">
+          <p><strong>Vendor:</strong> ${vendorName}</p>
+          <p><strong>ID Transaksi:</strong> VTX${String(transactionId).padStart(
+            3,
+            "0"
+          )}</p>
+          <p><strong>Status akan diubah:</strong> Belum → <span style="color: #27ae60; font-weight: bold;">Sudah</span></p>
+        </div>
+        <p>Apakah Anda yakin ingin melanjutkan?</p>
+      `,
+      showCancelButton: true,
+      confirmButtonText: "✓ Ya, Konfirmasi",
+      cancelButtonText: "✕ Batal",
+      confirmButtonColor: "#27ae60",
+      cancelButtonColor: "#e74c3c",
+      reverseButtons: true,
+      customClass: {
+        popup: "swal-wide",
+      },
+    });
 
-    if (window.confirm(message)) {
+    if (result.isConfirmed) {
       updateTransactionStatus(transactionId);
     }
   };
 
   // Refresh data setelah update berhasil
-  const refreshTransactions = () => {
-    fetchTransactions();
+  const refreshTransactions = async () => {
+    const result = await Swal.fire({
+      icon: "question",
+      title: "Refresh Data",
+      text: "Apakah Anda ingin memuat ulang data transaksi?",
+      showCancelButton: true,
+      confirmButtonText: "🔄 Ya, Refresh",
+      cancelButtonText: "Batal",
+      confirmButtonColor: "#3498db",
+      cancelButtonColor: "#95a5a6",
+    });
+
+    if (result.isConfirmed) {
+      fetchTransactions();
+
+      // Show success message after refresh
+      setTimeout(() => {
+        Swal.fire({
+          icon: "success",
+          title: "Data Diperbarui",
+          text: "Data transaksi berhasil dimuat ulang",
+          timer: 1500,
+          showConfirmButton: false,
+          timerProgressBar: true,
+        });
+      }, 100);
+    }
   };
 
   useEffect(() => {
@@ -287,7 +406,7 @@ const TransactionsList = () => {
 
   return (
     <div className="transactions-container">
-      <h2 className="transactions-title">Transactions</h2>
+      <h2 className="transactions-title">Vendor Transactions</h2>
 
       {error && (
         <div

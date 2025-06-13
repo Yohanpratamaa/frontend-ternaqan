@@ -23,7 +23,7 @@ ChartJS.register(
 const ADMIN_API = process.env.REACT_APP_ADMIN_API;
 const SAPI_API = process.env.REACT_APP_SAPI_API;
 const PET_API = process.env.REACT_APP_PET_API;
-const TRX_API = "http://localhost:8003/"; // Ganti jika ada service transaksi
+const TRX_API = process.env.REACT_APP_TRANSACTIONS_API;
 
 const Dashboard = () => {
   const [adminCount, setAdminCount] = useState(0);
@@ -93,7 +93,7 @@ const Dashboard = () => {
       body: JSON.stringify({
         query: `
           query {
-            transactions { id }
+            vendor_transactions { id }
           }
         `,
       }),

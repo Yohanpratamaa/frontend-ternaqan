@@ -556,3 +556,75 @@
     display: none;
   }
 }
+
+/* SweetAlert Custom Styles */
+.swal-wide {
+  width: 600px !important;
+}
+
+.swal2-popup {
+  border-radius: 16px !important;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15) !important;
+}
+
+.swal2-title {
+  font-size: 1.5rem !important;
+  font-weight: 700 !important;
+  color: #2c3e50 !important;
+}
+
+.swal2-html-container {
+  font-size: 0.95rem !important;
+  color: #34495e !important;
+  line-height: 1.6 !important;
+}
+
+.swal2-confirm {
+  border-radius: 8px !important;
+  font-weight: 600 !important;
+  padding: 12px 24px !important;
+  font-size: 0.9rem !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
+  transition: all 0.3s ease !important;
+}
+
+.swal2-cancel {
+  border-radius: 8px !important;
+  font-weight: 600 !important;
+  padding: 12px 24px !important;
+  font-size: 0.9rem !important;
+  transition: all 0.3s ease !important;
+}
+
+.swal2-confirm:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25) !important;
+}
+
+.swal2-cancel:hover {
+  transform: translateY(-2px) !important;
+}
+
+.swal2-timer-progress-bar {
+  background: linear-gradient(90deg, #3498db, #2980b9) !important;
+}
+
+/* Loading spinner override */
+.swal2-loading .swal2-confirm {
+  background: linear-gradient(135deg, #3498db, #2980b9) !important;
+}
+
+/* Question icon styling */
+.swal2-question .swal2-question-mark {
+  color: #f39c12 !important;
+}
+
+/* Info icon styling */
+.swal2-info .swal2-info-mark {
+  color: #3498db !important;
+}
+
+/* Warning icon styling */
+.swal2-warning .swal2-warning-mark {
+  color: #f39c12 !important;
+}
