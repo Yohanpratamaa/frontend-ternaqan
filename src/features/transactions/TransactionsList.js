@@ -401,8 +401,6 @@ const TransactionsList = () => {
     return (
       <div className="transactions-container">
         <h2 className="transactions-title">Vendor Transactions</h2>
-
-        {/* PERBAIKAN: Loading state yang lebih baik */}
         <div className="transactions-loading-wrapper">
           <div className="transactions-loading-content">
             <div className="transactions-loading-spinner"></div>
