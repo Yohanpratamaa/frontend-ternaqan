@@ -36,7 +36,7 @@ function ProductTable({ products, onDelete }) {
         {products.map((sapi) => (
           <tr key={sapi.id}>
             <td>{sapi.id}</td>
-            <td>{sapi.umur} Tahun</td>
+            <td>{sapi.umur} Bulan</td>
             <td>{formatNumber(sapi.berat)} Kg</td>
             <td>{formatNumber(sapi.stok)} Ekor</td>
             <td className="price-cell">{formatIDR(sapi.harga)}</td>
